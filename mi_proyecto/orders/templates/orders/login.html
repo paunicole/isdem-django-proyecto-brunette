@@ -1,0 +1,32 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+ 
+{% endblock %}
+
+{% block body %}
+<h1>Inicio Sesión</h1>
+{% if message %}
+    <div>
+        {{ message }}
+    </div>
+{% endif %}
+
+<form action="{% url 'login' %}" method="post">
+	 {% csrf_token %}
+<div class="form-group">
+    <label >Usuario</label>
+    <input type="text" class="form-control" name="username" placeholder="Username">
+  </div>
+
+ 
+  <div class="form-group">
+    <label >Contraseña</label>
+    <input type="password" class="form-control" placeholder="Password" name="password" type="password">
+  </div>
+
+  <button type="submit" class="btn btn-primary" value="Login">Entrar</button>
+</form>
+
+<small>	Necesitas una cuenta? Click aquí para <a href="{% url 'signup' %}">Registrarse</a></small>
+{% endblock %}
