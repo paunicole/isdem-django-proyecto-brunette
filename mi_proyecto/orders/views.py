@@ -69,6 +69,17 @@ def apertura_caja(request):
 		"empleado": request.user,
 		"cajas": cajas
 	}
+	if request.method == "POST":
+		numero = request.POST.get("numero")
+		empleado = request.user
+		turno = request.POST.get("turno")
+		abierta = True
+		fecha_hora_apertura = request.POST.get("fecha_hora_apertura")
+		monto_inicial = request.POST.get("monto_inicial")
+		apertura_caja = Caja(numero=numero, empleado=empleado, turno=turno, abierta=abierta, fecha_hora_apertura=fecha_hora_apertura, monto_inicial=monto_inicial)
+		apertura_caja.save()
+		messages.success(request,"Caja abierta con éxito.")
+		return redirect("apertura-caja")
 	return render(request, "orders/apertura.html", context)
 
 def cierre_caja(request):

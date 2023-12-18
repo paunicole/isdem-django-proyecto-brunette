@@ -94,11 +94,14 @@ class Caja(models.Model):
 	numero = models.IntegerField(unique=True)
 	empleado = models.ForeignKey(User, on_delete=models.CASCADE)
 	turno = models.CharField(max_length=255, choices=turnos)
-	abierta = models.BooleanField(default=True)
+	abierta = models.BooleanField()
 	fecha_hora_apertura = models.DateTimeField()
 	fecha_hora_cierre = models.DateTimeField()
 	monto_inicial = models.DecimalField(max_digits=10, decimal_places=2)
 	monto_final = models.DecimalField(max_digits=10, decimal_places=2)
+
+	def __str__(self):
+		return f"Caja {self.numero}"
 
 class Venta(models.Model):
     id_venta = models.AutoField(primary_key=True)
