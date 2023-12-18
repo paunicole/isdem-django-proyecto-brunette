@@ -14,7 +14,8 @@
     <div class="form-group">
         <label>Proovedor: </label>
         {% if proveedores %}
-            <select class="form-control" id="exampleFormControlSelect1" name="proveedor" >
+            <select class="form-control" id="exampleFormControlSelect1" name="proveedor" required>
+            <option value="" disabled selected>Seleccione un proveedor..</option>
             {% for proveedor in proveedores %}
                 <option value="{{proveedor.id}}">{{ proveedor.nombre }}</option>
             {% endfor %}
@@ -30,6 +31,7 @@
     <div class="form-group">
         <label>Estado Factura: </label>
         <select class="form-control" name="estado_factura">
+            <option value="" disabled selected>Seleccione un estado..</option>
             <option value="Abonada">Abonada</option>
             <option value="No Abonada">No Abonada</option>
         </select>
@@ -37,12 +39,12 @@
 
     <div class="form-group">
         <label>Monto: </label>
-        <input type="number" class="form-control" placeholder="Monto" name="monto">
+        <input type="number" class="form-control" placeholder="Monto" name="monto" required>
     </div>
 
     <div class="form-group">
         <label>Fecha de Vencimiento: </label>
-        <input type="date" class="form-control" name="fecha_vencimiento">
+        <input type="date" class="form-control" name="fecha_vencimiento" required>
     </div>
 
     <button class="btn btn-primary" type="submit" value="Crear">Crear</button>
