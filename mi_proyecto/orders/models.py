@@ -84,3 +84,36 @@ class Order(models.Model):
 			return f"{self.user_id}, Status: On Order"
 		else:
 			return f"{self.user_id}, Status: Complete"
+
+class Caja(models.Model):
+	numero = models.IntegerField(unique=True)
+	empleado = models.ForeignKey(User, on_delete=models.CASCADE)
+	fecha_apertura = models.DateTimeField()
+	fecha_cierre = models.DateTimeField()
+	monto_inicial = models.DecimalField(max_digits=10, decimal_places=2)
+
+class Venta(models.Model):
+    id_venta = models.AutoField(primary_key=True)
+    id_caja = models.ForeignKey(Caja, on_delete=models.CASCADE)
+    fecha_venta = models.DateField()
+    hora_venta = models.TimeField()
+    total_venta = models.DecimalField(max_digits=10, decimal_places=2)
+
+class Proveedor(models.Model):
+    nombre = models.CharField(max_length=255)
+    tipo_proveedor = models.CharField(max_length=20)
+    telefono = models.CharField(max_length=15)
+    correo = models.EmailField()
+    direccion = models.TextField()
+
+class Factura(models.Model):
+	estados = [
+        ('abonada', 'Abonada'),
+        ('no_abonada', 'No Abonada'),
+    ]
+
+	proveedor = models.ForeignKey(User, on_delete=models.CASCADE)
+	tipo_servicio = models.CharField(max_length=255)
+	estado_factura = models.CharField(max_length=255, choices=estados)
+	monto = models.DecimalField(max_digits=10, decimal_places=2)
+	fecha_vencimiento = models.DateField()

@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.db.models import Sum
@@ -9,7 +9,7 @@ from django.contrib import messages
 
 
 
-from .models import Size, Category, Topping, Price_List, Item_List, Cart_List, Extra, Order
+from .models import Size, Category, Topping, Price_List, Item_List, Cart_List, Extra, Order, Caja, Proveedor, Factura
 
 # Create your views here.
 def index(request):
@@ -63,6 +63,114 @@ def signup_view(request):
 	return render(request = request,
                   template_name = "orders/signup.html",
                   context={"form":form})
+
+def apertura_caja(request):
+	cajas = Caja.objects.all()
+	context = {
+		"empleado": request.user,
+		"cajas": cajas
+	}
+	return render(request, "orders/apertura.html", context)
+
+def cierre_caja(request):
+	cajas = Caja.objects.all()
+	context = {
+		"empleado": request.user,
+		"cajas": cajas
+	}
+	return render(request, "orders/cierre.html", context)
+
+def ver_proveedores(request):
+	proveedores = Proveedor.objects.all()
+	context = {
+		"proveedores": proveedores
+	}
+	return render(request, "orders/proveedores.html", context)
+
+def eliminar_proveedor(request, id_proveedor):
+	proveedor = Proveedor.objects.get(id=id_proveedor)
+	proveedor.delete()
+	messages.success(request,"Proveedor eliminado con éxito.")
+	return redirect("ver-proveedores")
+
+def editar_proveedor(request, id_proveedor):
+	proveedor = Proveedor.objects.get(id=id_proveedor)
+	if request.method == "POST":
+		nombre = request.POST.get("nombre")
+		
+		servicio = request.POST.get("servicio")
+		telefono = request.POST.get("telefono")
+		correo = request.POST.get("correo")
+		direccion = request.POST.get("direccion")
+
+		# Actualiza los campos del proveedor existente
+		proveedor.nombre = nombre
+		proveedor.tipo_proveedor = servicio
+		proveedor.telefono = telefono
+		proveedor.correo = correo
+		proveedor.direccion = direccion
+		proveedor.save()
+
+		messages.success(request,"Proveedor guardado con éxito.")
+		return redirect("ver-proveedores")
+	context = {
+        "nombre": proveedor.nombre,
+        "servicio": proveedor.tipo_proveedor,
+        "telefono": proveedor.telefono,
+        "correo": proveedor.correo,
+        "direccion": proveedor.direccion,
+    }
+	return render(request, "orders/editar_proveedor.html", context)
+
+def crear_proveedor(request):
+	if request.method == "POST":
+		nombre = request.POST.get("nombre")
+		servicio = request.POST.get("servicio")
+		telefono = request.POST.get("telefono")
+		correo = request.POST.get("correo")
+		direccion = request.POST.get("direccion")
+		nuevo_proveedor = Proveedor(nombre=nombre, tipo_proveedor=servicio, telefono=telefono, correo=correo, direccion=direccion)
+		nuevo_proveedor.save()
+		messages.success(request,"Proveedor añadido con éxito.")
+		return redirect("ver-proveedores")
+	return render(request, "orders/crear_proveedor.html")
+
+def pago_impuestos(request):
+	facturas = Factura.objects.all()
+	context = {
+		"facturas": facturas
+	}
+	return render(request, "orders/pago_impuestos.html", context)
+
+def crear_factura(request):
+	proveedores = Proveedor.objects.all()
+	if request.method == "POST":
+		proveedor = request.POST.get("proveedor")
+		tipo_servicio = request.POST.get("tipo_servicio")
+		estado_factura = request.POST.get("estado_factura")
+		monto = request.POST.get("monto")
+		fecha_vencimiento = request.POST.get("fecha_vencimiento")
+		nueva_factura = Factura(proveedor=proveedor, tipo_servicio=tipo_servicio, estado_factura=estado_factura, monto=monto, fecha_vencimiento=fecha_vencimiento)
+		nueva_factura.save()
+		messages.success(request,"Factura añadida con éxito.")
+		return redirect("pago-impuestos")
+	context = {
+		"proveedores": proveedores
+	}
+	return render(request, "orders/crear_factura.html", context)
+
+def eliminar_factura(request, id_factura):
+	factura = Factura.objects.get(id=id_factura)
+	factura.delete()
+	messages.success(request,"Factura eliminada con éxito.")
+
+	return redirect("pago-impuestos")
+
+def editar_factura(request):
+	return render(request, "orders/editar_factura.html")
+
+def ventas(request):
+	return render(request, "orders/ventas.html")
 
 def cart_view(request):
 	

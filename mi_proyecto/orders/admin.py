@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Size, Category, Topping, Price_List, Item_List, Cart_List, Extra, Order
+from .models import Size, Category, Topping, Price_List, Item_List, Cart_List, Extra, Order, Caja, Proveedor, Factura
 
 
 # Register your models here.
@@ -18,6 +18,15 @@ class CartAdmin(admin.ModelAdmin):
 	filter_horizontal = ("toppings",)
 	# filter_horizontal = ("extra",)
 
+class CajaAdmin(admin.ModelAdmin):
+	list_display = ("numero", "empleado", "fecha_apertura", "fecha_cierre", "monto_inicial")
+
+class ProveedorAdmin(admin.ModelAdmin):
+	list_display = ("nombre", "tipo_proveedor", "telefono", "correo", "direccion")
+
+class FacturaAdmin(admin.ModelAdmin):
+	list_display = ("proveedor", "tipo_servicio", "estado_factura", "monto", "fecha_vencimiento")
+
 admin.site.register(Size)
 admin.site.register(Category)
 admin.site.register(Topping, ToppingAdmin)
@@ -26,9 +35,9 @@ admin.site.register(Item_List)
 admin.site.register(Cart_List, CartAdmin)
 admin.site.register(Extra)
 admin.site.register(Order)
-
-
-
+admin.site.register(Caja, CajaAdmin)
+admin.site.register(Proveedor, ProveedorAdmin)
+admin.site.register(Factura, FacturaAdmin)
 
 
 

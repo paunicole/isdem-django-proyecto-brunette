@@ -1,0 +1,44 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+    Editar Proveedor
+{% endblock %}
+
+{% block body %}
+<h1>Editar Proveedor</h1>
+<hr>
+
+<form class="bg-light p-4 rounded" method="POST">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label>Nombre: </label>
+        <input type="text" class="form-control" name="nombre" placeholder="Nombre" value="{{nombre}}" required>
+    </div>
+
+    <div class="form-group">
+        <label>Servicio: </label>
+        <input type="text" class="form-control" name="servicio" placeholder="Servicio" value="{{servicio}}">
+    </div>
+
+    <div class="form-group">
+        <label>Teléfono: </label>
+        <input type="tel" class="form-control" placeholder="Teléfono" name="telefono" value="{{telefono}}">
+    </div>
+
+    <div class="form-group">
+        <label>Correo: </label>
+        <input type="email" class="form-control" placeholder="Correo" name="correo" value="{{correo}}">
+    </div>
+
+    <div class="form-group">
+        <label>Dirección: </label>
+        <input type="text" class="form-control" placeholder="Dirección" name="direccion" value="{{direccion}}">
+    </div>
+
+    <button class="btn btn-primary" type="submit" value="Editar">Guardar</button>
+</form>
+
+<a class="btn btn-primary mt-3" href="{% url 'ver-proveedores' %}">Volver</a>
+
+{% endblock %}

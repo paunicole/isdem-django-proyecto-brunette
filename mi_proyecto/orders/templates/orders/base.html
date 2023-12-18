@@ -3,39 +3,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href=" {% static 'orders/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href=" {% static 'orders/styles.css' %}">
 	<title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="static/orders/logo.png" type="image/png">
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="{% url 'index'%}">Brunette</a>
-  <img src="static/orders/logo.png" alt="" width="50">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <a class="navbar-brand" href="{% url 'index'%}">Brunette</a>
+    <img src="static/orders/logo.png" alt="" width="50">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
 
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'cart'%}">Carrito de Compras</a>
-      </li>
-      {% if not request.user.is_authenticated %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
-      </li>
-      {% else %}
-      <li class="nav-item">
-      <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
-      </li>
-      {% endif %}
-    </ul>
-    		
-  </div>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Ventas
+            </a>
+            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                <a class="nav-link" href="{% url 'index'%}">Hacer Venta</a>
+                <a class="nav-link" href="{% url 'index'%}">Ver Ventas</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Compras
+            </a>
+            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                <a class="nav-link" href="{% url 'index'%}">Registrar Compra</a>
+                <a class="nav-link" href="{% url 'index'%}">Ver Compras</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Caja
+            </a>
+            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                <a class="nav-link" href="{% url 'apertura-caja'%}">Apertura de Caja</a>
+                <a class="nav-link" href="{% url 'cierre-caja'%}">Cierre de Caja</a>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'ver-proveedores'%}">Proveedores</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'pago-impuestos' %}">Pago Impuestos</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'cart'%}">Carrito de Compras</a>
+        </li>
+        {% if not request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
+        </li>
+        {% endif %}
+        </ul>	
+    </div>
+
 </nav>
     {% if messages %}
     <!-- <ul class="messages"> -->

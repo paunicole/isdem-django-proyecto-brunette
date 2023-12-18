@@ -1,0 +1,57 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+    Pago de Impuestos
+{% endblock %}
+
+{% block body %}
+<h1>Pago de Impuestos</h1>
+<hr>
+
+<div class="row text-start">
+    <div class="col">
+        <a class="btn btn-primary" href="{% url 'crear-factura' %}">Añadir Factura</a>
+    </div>
+</div>
+
+<div class="row">
+    {% if facturas %}
+        
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Proveedor</th>
+            <th scope="col">Servicio</th>
+            <th scope="col">Estado Factura</th>
+            <th scope="col">Monto</th>
+            <th scope="col">Fecha Vencimiento</th>
+            <th scope="col">Opciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for factura in facturas %}
+        <tr>
+            <th scope="row">1</th>
+            <td>{{ factura.proveedor }}</td>
+            <td>{{ factura.tipo_servicio }}</td>
+            <td>{{ factura.estado_factura }}</td>
+            <td>{{ factura.monto }}</td>
+            <td>{{ factura.fecha_vencimiento }}</td>
+            <td>
+                <a href="{% url 'editar-factura' factura.id %}" class="btn btn-warning">Editar</a>
+                <a href="{% url 'eliminar-factura' factura.id %}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+        <p>No hay facturas registradas.</p>
+    {% endif %}
+</div>
+
+<a class="btn btn-primary mt-3" href="{% url 'index' %}">Volver</a>
+
+{% endblock %}
