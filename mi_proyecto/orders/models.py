@@ -100,11 +100,14 @@ class Venta(models.Model):
     total_venta = models.DecimalField(max_digits=10, decimal_places=2)
 
 class Proveedor(models.Model):
-    nombre = models.CharField(max_length=255)
-    tipo_proveedor = models.CharField(max_length=20)
-    telefono = models.CharField(max_length=15)
-    correo = models.EmailField()
-    direccion = models.TextField()
+	nombre = models.CharField(max_length=255)
+	tipo_proveedor = models.CharField(max_length=20)
+	telefono = models.CharField(max_length=15)
+	correo = models.EmailField()
+	direccion = models.TextField()
+
+	def __str__(self):
+		return self.nombre
 
 class Factura(models.Model):
 	estados = [
@@ -112,7 +115,7 @@ class Factura(models.Model):
         ('no_abonada', 'No Abonada'),
     ]
 
-	proveedor = models.ForeignKey(User, on_delete=models.CASCADE)
+	proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
 	tipo_servicio = models.CharField(max_length=255)
 	estado_factura = models.CharField(max_length=255, choices=estados)
 	monto = models.DecimalField(max_digits=10, decimal_places=2)

@@ -8,4 +8,47 @@
 <h1>Editar Factura</h1>
 <hr>
 
+<form class="bg-light p-4 rounded" method="POST">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label>Proovedor: </label>
+        {% if proveedores %}
+            <select class="form-control" id="exampleFormControlSelect1" name="proveedor">
+                <option value="{{ proveedor.id }}" selected>{{ proveedor.nombre }}</option>
+            {% for proveedor in proveedores %}
+                <option value="{{proveedor.id}}">{{ proveedor.nombre }}</option>
+            {% endfor %}
+            </select>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label>Tipo servicio: </label>
+        <input type="text" class="form-control" name="tipo_servicio" placeholder="Servicio" value="{{tipo_servicio}}">
+    </div>
+
+    <div class="form-group">
+        <label>Estado Factura: </label>
+        <select class="form-control" name="estado_factura">
+            <option value="Abonada">Abonada</option>
+            <option value="No Abonada">No Abonada</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Monto: </label>
+        <input type="number" class="form-control" name="monto" value="{{monto}}">
+    </div>
+
+    <div class="form-group">
+        <label>Fecha de Vencimiento: </label>
+        <input type="date" class="form-control" name="fecha_vencimiento" value="{{fecha_vencimiento}}">
+    </div>
+
+    <button class="btn btn-primary" type="submit" value="Crear">Crear</button>
+</form>
+
+<a class="btn btn-primary mt-3" href="{% url 'pago-impuestos' %}">Volver</a>
+
 {% endblock %}

@@ -8,7 +8,6 @@ from django.db.models import Sum
 from django.contrib import messages
 
 
-
 from .models import Size, Category, Topping, Price_List, Item_List, Cart_List, Extra, Order, Caja, Proveedor, Factura
 
 # Create your views here.
@@ -145,13 +144,15 @@ def pago_impuestos(request):
 def crear_factura(request):
 	proveedores = Proveedor.objects.all()
 	if request.method == "POST":
-		proveedor = request.POST.get("proveedor")
+		proveedor = Proveedor.objects.get(id = request.POST.get("proveedor"))
 		tipo_servicio = request.POST.get("tipo_servicio")
 		estado_factura = request.POST.get("estado_factura")
 		monto = request.POST.get("monto")
 		fecha_vencimiento = request.POST.get("fecha_vencimiento")
+
 		nueva_factura = Factura(proveedor=proveedor, tipo_servicio=tipo_servicio, estado_factura=estado_factura, monto=monto, fecha_vencimiento=fecha_vencimiento)
 		nueva_factura.save()
+		
 		messages.success(request,"Factura añadida con éxito.")
 		return redirect("pago-impuestos")
 	context = {
@@ -166,8 +167,37 @@ def eliminar_factura(request, id_factura):
 
 	return redirect("pago-impuestos")
 
-def editar_factura(request):
-	return render(request, "orders/editar_factura.html")
+def editar_factura(request, id_factura):
+	factura = Factura.objects.get(id=id_factura)
+	proveedores = Proveedor.objects.all()
+	if request.method == "POST":
+		proveedor = Proveedor.objects.get(id = request.POST.get("proveedor"))
+		tipo_servicio = request.POST.get("tipo_servicio")
+		estado_factura = request.POST.get("estado_factura")
+		monto = request.POST.get("monto")
+		fecha_vencimiento = request.POST.get("fecha_vencimiento")
+
+		# Actualiza los campos del proveedor existente
+		factura.proveedor = proveedor
+		factura.tipo_servicio = tipo_servicio
+		factura.estado_factura = estado_factura
+		factura.monto = monto
+		factura.fecha_vencimiento = fecha_vencimiento
+		factura.save()
+
+		messages.success(request,"Factura guardada con éxito.")
+		return redirect("pago-impuestos")
+	fecha_vencimiento_formateada = factura.fecha_vencimiento.strftime('%Y-%m-%d')
+	context = {
+		"proveedores": proveedores,
+        "proveedor": factura.proveedor,
+        "tipo_servicio": factura.tipo_servicio,
+        "estado_factura": factura.estado_factura,
+        "monto": factura.monto,
+        "fecha_vencimiento": fecha_vencimiento_formateada,
+    }
+
+	return render(request, "orders/editar_factura.html", context)
 
 def ventas(request):
 	return render(request, "orders/ventas.html")

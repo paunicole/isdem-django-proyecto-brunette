@@ -16,7 +16,7 @@
         {% if proveedores %}
             <select class="form-control" id="exampleFormControlSelect1" name="proveedor" >
             {% for proveedor in proveedores %}
-                <option value="{{proveedor.nombre}}">{{ proveedor.nombre }}</option>
+                <option value="{{proveedor.id}}">{{ proveedor.nombre }}</option>
             {% endfor %}
             </select>
         {% endif %}
@@ -30,8 +30,8 @@
     <div class="form-group">
         <label>Estado Factura: </label>
         <select class="form-control" name="estado_factura">
-            <option value="abonada">Abonada</option>
-            <option value="no_abonada">No Abonada</option>
+            <option value="Abonada">Abonada</option>
+            <option value="No Abonada">No Abonada</option>
         </select>
     </div>
 
