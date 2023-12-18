@@ -86,11 +86,19 @@ class Order(models.Model):
 			return f"{self.user_id}, Status: Complete"
 
 class Caja(models.Model):
+	turnos = [
+        ('Mañana', 'Mañana'),
+        ('Tarde', 'Tarde'),
+    ]
+
 	numero = models.IntegerField(unique=True)
 	empleado = models.ForeignKey(User, on_delete=models.CASCADE)
-	fecha_apertura = models.DateTimeField()
-	fecha_cierre = models.DateTimeField()
+	turno = models.CharField(max_length=255, choices=turnos)
+	abierta = models.BooleanField(default=True)
+	fecha_hora_apertura = models.DateTimeField()
+	fecha_hora_cierre = models.DateTimeField()
 	monto_inicial = models.DecimalField(max_digits=10, decimal_places=2)
+	monto_final = models.DecimalField(max_digits=10, decimal_places=2)
 
 class Venta(models.Model):
     id_venta = models.AutoField(primary_key=True)

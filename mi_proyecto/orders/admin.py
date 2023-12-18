@@ -19,7 +19,7 @@ class CartAdmin(admin.ModelAdmin):
 	# filter_horizontal = ("extra",)
 
 class CajaAdmin(admin.ModelAdmin):
-	list_display = ("numero", "empleado", "fecha_apertura", "fecha_cierre", "monto_inicial")
+	list_display = ("numero", "empleado", "turno", "abierta", "fecha_hora_apertura", "fecha_hora_cierre", "monto_inicial", "monto_final")
 
 class ProveedorAdmin(admin.ModelAdmin):
 	list_display = ("nombre", "tipo_proveedor", "telefono", "correo", "direccion")
