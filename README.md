@@ -1,6 +1,6 @@
 # Proyecto Brunette
 
-Proyecto de un restaurante hecho en Django
+Proyecto Brunette es un sistema integral de gestión diseñado específicamente para restaurantes, desarrollado utilizando el framework Django de Python. Este sistema proporciona un conjunto de herramientas robustas y funcionalidades esenciales para facilitar la administración eficiente de un restaurante.
 
 ## ⚙️ Instalación
 
