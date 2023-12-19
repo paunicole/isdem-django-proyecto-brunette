@@ -1,9 +1,10 @@
 # Proyecto Brunette
-En este repositorio encontrarán los siguientes archivos:
+
+Proyecto de un restaurante hecho en Django
 
 ## ⚙️ Instalación
 
-**1. Correr el proyecto**: Siempre en el mismo directorio del archivo *docker-compose.yml*  
+**1. Correr el proyecto**: Siempre en el mismo directorio del archivo *docker-compose.yml*
 
 **$** `docker-compose up`
 
@@ -62,6 +63,24 @@ Usa el siguiente comando, en el mismo directorio de manage.py, para crear al adm
 
 Para iniciar sesión en el sitio, ve a la URL /admin (e.j. http://localhost:8000/admin) e ingresa tus credenciales de id usuario y contraseña de administrador.
 
+## ⚡ Funcionalidades
+
+### Login
+
+Permite a los usuarios acceder al sistema de gestión del restaurante de manera segura. Los usuarios pueden ingresar sus credenciales (nombre de usuario y contraseña) para autenticarse y obtener acceso a las diversas características del sistema.
+
+### Registro de Usuarios
+
+Posibilita la creación de nuevas cuentas dentro del sistema.
+
+### Apertura y Cierre de Caja
+
+Habilita la funcionalidad para abrir y cerrar la caja del restaurante, proporcionando un seguimiento preciso de las transacciones financieras diarias.
+
+### Pago de Impuestos
+
+Ofrece una interfaz para gestionar el pago de impuestos, permitiendo a los usuarios registrar y gestionar facturas de impuestos de manera eficiente.
+
 ## 🔗 URLs del proyecto <a name = "project_urls"></a>
 
 El proyecto cuenta con las siguientes URLs:
@@ -77,7 +96,8 @@ El proyecto cuenta con las siguientes URLs:
 | URL                               | Descripción                      |
 |-----------------------------------|----------------------------------|
 | /login                            | Iniciar Sesión                   |
-| /logout                           | Registro de Usuarios             |
+| /logout                           | Cerrar Sesión                    |
+| /signup                           | Registro de Usuario              |
 
 ### Caja
 
