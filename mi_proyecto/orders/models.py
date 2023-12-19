@@ -91,14 +91,14 @@ class Caja(models.Model):
         ('Tarde', 'Tarde'),
     ]
 
-	numero = models.IntegerField(unique=True)
+	numero = models.IntegerField()
 	empleado = models.ForeignKey(User, on_delete=models.CASCADE)
 	turno = models.CharField(max_length=255, choices=turnos)
 	abierta = models.BooleanField()
 	fecha_hora_apertura = models.DateTimeField()
-	fecha_hora_cierre = models.DateTimeField()
+	fecha_hora_cierre = models.DateTimeField(blank=True, null=True)
 	monto_inicial = models.DecimalField(max_digits=10, decimal_places=2)
-	monto_final = models.DecimalField(max_digits=10, decimal_places=2)
+	monto_final = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
 	def __str__(self):
 		return f"Caja {self.numero}"
