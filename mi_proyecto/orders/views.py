@@ -34,14 +34,14 @@ def login_view(request):
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
     else:
-    	return render(request, "orders/login.html", {"message": "Invalid credentials."})
+    	return render(request, "orders/login.html", {"message": "El usuario o la contraseña son incorrectos"})
 	# else:
 	# return render(request, "orders/login.html")
 
 
 def logout_view(request):
     logout(request)
-    return render(request, "orders/login.html", {"message": "Desconectado."})
+    return render(request, "orders/login.html", {"message": "Desconectado"})
 
 def signup_view(request):
 	if request.method == "POST":

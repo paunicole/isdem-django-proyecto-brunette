@@ -19,8 +19,11 @@
 
     <title>{% block title %}{% endblock %}</title>
     <link rel="icon" href="static/orders/logo.png" type="image/png">
+
 </head>
 <body>
+
+    {% if request.user.is_authenticated %}
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{% url 'index'%}">Brunette</a>
     <img src="static/orders/logo.png" alt="" width="50">
@@ -85,6 +88,8 @@
     </div>
 
 </nav>
+
+{% endif %}
     {% if messages %}
     <!-- <ul class="messages"> -->
         {% for message in messages %}
