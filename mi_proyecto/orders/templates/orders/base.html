@@ -17,6 +17,9 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <title>{% block title %}{% endblock %}</title>
     <link rel="icon" href="static/orders/logo.png" type="image/png">
 
@@ -34,56 +37,68 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
 
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Ventas
-            </a>
-            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                <a class="nav-link" href="{% url 'index'%}">Hacer Venta</a>
-                <a class="nav-link" href="{% url 'index'%}">Ver Ventas</a>
-            </div>
-        </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Ventas
+                </a>
+                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                    <a class="nav-link" href="{% url 'index'%}">Hacer Venta</a>
+                    <a class="nav-link" href="{% url 'index'%}">Ver Ventas</a>
+                </div>
+            </li>
 
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Compras
-            </a>
-            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                <a class="nav-link" href="{% url 'index'%}">Registrar Compra</a>
-                <a class="nav-link" href="{% url 'index'%}">Ver Compras</a>
-            </div>
-        </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Compras
+                </a>
+                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                    <a class="nav-link" href="{% url 'index'%}">Registrar Compra</a>
+                    <a class="nav-link" href="{% url 'index'%}">Ver Compras</a>
+                </div>
+            </li>
 
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Caja
-            </a>
-            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                <a class="nav-link" href="{% url 'apertura-caja'%}">Apertura de Caja</a>
-                <a class="nav-link" href="{% url 'cierre-caja'%}">Cierre de Caja</a>
-            </div>
-        </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Caja
+                </a>
+                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                    <a class="nav-link" href="{% url 'apertura-caja'%}">Apertura de Caja</a>
+                    <a class="nav-link" href="{% url 'cierre-caja'%}">Cierre de Caja</a>
+                </div>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'ver-proveedores'%}">Proveedores</a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'ver-proveedores'%}">Proveedores</a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'pago-impuestos' %}">Pago Impuestos</a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'pago-impuestos' %}">Pago Impuestos</a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'cart'%}">Carrito de Ventas</a>
-        </li>
-        {% if not request.user.is_authenticated %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-        <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
-        </li>
-        {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'cart'%}">Carrito de Ventas</a>
+            </li>
+
+            {% if not request.user.is_authenticated %}
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+            </li>
+
+            {% else %}
+
+            <!-- Usuario -->
+            <li class="nav-item dropdown bg-success rounded-pill">
+                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-user" style="color: #ffffff;"></i>   {{request.user}}
+                </a>
+                <div class="dropdown-menu bg-success dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <a class="nav-link" href="{% url 'logout' %}">Salir</a>
+                </div>
+            </li>
+
+            {% endif %}
+
         </ul>	
     </div>
 
