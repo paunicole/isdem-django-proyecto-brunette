@@ -1,0 +1,51 @@
+{% block datatable %}
+<script>
+    $(document).ready(function () {
+        var tableOptions = {
+            paging: true,
+            pageLength: 8,
+            lengthChange: true,
+            autoWidth: true,
+            info: true,
+            sort: true,
+            columnDefs: [
+                { orderable: false, targets: -1 }
+            ],
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+            },
+            order: [[2, "asc"]]
+        };
+
+        $("#tabla-proveedores").each(function () {
+            $(this).DataTable({
+                ...tableOptions,
+                columnDefs: [
+                    ...tableOptions.columnDefs,
+                    { searchable: false, targets: [-2, -1] }
+                ]
+            });
+        });
+
+        $("#tabla-pagos").DataTable({
+            ...tableOptions,
+            columnDefs: [
+                ...tableOptions.columnDefs,
+                { searchable: true, targets: [-2] },
+                { searchable: false, targets: [-1] }
+            ]
+        });
+    });
+
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const rows = document.querySelectorAll('.datatable-row');
+
+        gsap.set(rows, { opacity: 0, y: 20 });
+
+        gsap.to(rows, { opacity: 1, y: 0, duration: 0.3, delay: function(index) { return index * 0.1; } });
+    });
+</script>
+{% endblock %}

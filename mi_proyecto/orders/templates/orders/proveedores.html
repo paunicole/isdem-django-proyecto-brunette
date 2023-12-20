@@ -17,7 +17,7 @@
 <div class="row">
     {% if proveedores %}
         
-    <table class="table table-striped table-hover">
+    <table id="tabla-proveedores" class="table table-striped table-hover">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -31,7 +31,7 @@
         </thead>
         <tbody>
         {% for proveedor in proveedores %}
-        <tr>
+        <tr class="datatable-row">
             <th scope="row">{{ proveedor.id }}</th>
             <td>{{ proveedor.nombre }}</td>
             <td>{{ proveedor.servicio }}</td>

@@ -33,6 +33,8 @@
                 <option value="{{caja.numero}}">{{ caja.numero }}</option>
             {% endfor %}
             </select>
+        {% else %}
+            <p class="text-danger">No hay cajas disponibles</p>
         {% endif %}
     </div>
 

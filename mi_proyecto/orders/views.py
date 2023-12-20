@@ -64,7 +64,7 @@ def signup_view(request):
                   context={"form":form})
 
 def apertura_caja(request):
-	cajas = Caja.objects.all()
+	cajas = Caja.objects.filter(empleado=request.user, abierta=False)
 	context = {
 		"empleado": request.user,
 		"cajas": cajas
