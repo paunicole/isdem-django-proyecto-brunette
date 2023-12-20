@@ -1,0 +1,40 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+Nueva contraseña
+{% endblock %}
+
+{% block body %}
+
+<section class="vh-100" style="background-color: #ffffff;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row g-0">
+
+                        <div class="">
+                            <div class="card-body p-4 p-lg-5 text-black">
+        
+                                <div class="d-flex align-items-center mb-3 pb-1">
+                                    <span class="h1 fw-bold mb-0">Escriba la nueva contraseña</span>
+                                </div>
+
+                                <p>Por favor, introduzca su contraseña nueva dos veces para verificar que la ha escrito correctamente.</p>
+
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    {{ form }}
+                                    <input type="submit" name="Send email">
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+{% endblock %}

@@ -38,7 +38,6 @@ def login_view(request):
 	# else:
 	# return render(request, "orders/login.html")
 
-
 def logout_view(request):
     logout(request)
     return render(request, "orders/login.html", {"message": "Desconectado"})
